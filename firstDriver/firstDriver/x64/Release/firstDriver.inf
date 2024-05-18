@@ -1,0 +1,80 @@
+;
+; firstDriver.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=System ; TODO: specify appropriate Class
+ClassGuid={4d36e97d-e325-11ce-bfc1-08002be10318} ; TODO: specify appropriate ClassGuid
+Provider=%ManufacturerName%
+CatalogFile=firstDriver.cat
+DriverVer = 05/18/2024,19.48.17.4
+PnpLockdown=1
+
+[DestinationDirs]
+DefaultDestDir = 12
+firstDriver_Device_CoInstaller_CopyFiles = 11
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+firstDriver.sys  = 1,,
+;
+
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName%=Standard,NTamd64
+
+[Standard.NTamd64]
+%firstDriver.DeviceDesc%=firstDriver_Device, Root\firstDriver ; TODO: edit hw-id
+
+[firstDriver_Device.NT]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+firstDriver.sys
+
+;-------------- Service installation
+[firstDriver_Device.NT.Services]
+AddService = firstDriver,%SPSVCINST_ASSOCSERVICE%, firstDriver_Service_Inst
+
+; -------------- firstDriver driver install sections
+[firstDriver_Service_Inst]
+DisplayName    = %firstDriver.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\firstDriver.sys
+
+;
+;--- firstDriver_Device Coinstaller installation ------
+;
+
+[firstDriver_Device.NT.CoInstallers]
+AddReg=firstDriver_Device_CoInstaller_AddReg
+CopyFiles=firstDriver_Device_CoInstaller_CopyFiles
+
+[firstDriver_Device_CoInstaller_AddReg]
+;
+
+
+[firstDriver_Device_CoInstaller_CopyFiles]
+;
+
+
+[firstDriver_Device.NT.Wdf]
+KmdfService =  firstDriver, firstDriver_wdfsect
+[firstDriver_wdfsect]
+KmdfLibraryVersion = 1.15
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="<Your manufacturer name>" ;TODO: Replace with your manufacturer name
+DiskName = "firstDriver Installation Disk"
+firstDriver.DeviceDesc = "firstDriver Device"
+firstDriver.SVCDESC = "firstDriver Service"

@@ -1,0 +1,24 @@
+﻿  Building 'firstDriver' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
+  Stamping x64\Release\firstDriver.inf
+  Stamping [Version] section with DriverVer=05/18/2024,19.48.17.4
+  firstDriver.vcxproj -> C:\Users\user\source\repos\firstDriver\x64\Release\firstDriver.sys
+  Done Adding Additional Store
+  Successfully signed: C:\Users\user\source\repos\firstDriver\x64\Release\firstDriver.sys
+  
+  Driver is 'Universal'.
+  .........................
+  Signability test complete.
+  
+  Errors:
+  None
+  
+  Warnings:
+  None
+  
+  Catalog generation complete.
+  C:\Users\user\source\repos\firstDriver\x64\Release\firstDriver\firstdriver.cat
+  Done Adding Additional Store
+  Successfully signed: C:\Users\user\source\repos\firstDriver\x64\Release\firstDriver\firstdriver.cat
+  
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.
